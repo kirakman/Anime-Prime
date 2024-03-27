@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput } from 'react-native'
 import React from 'react'
+import LoginButton from '../components/LoginButton';
 
 const Homepage = () => {
   return (
@@ -26,6 +27,9 @@ const Homepage = () => {
         keyboardType="numeric"
         placeholderTextColor="white"
       />
+    <View style={styles.button}>
+    <LoginButton/>
+    </View>
     </View>
     </SafeAreaView>
   </ImageBackground>
@@ -74,7 +78,11 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'rgba(52, 52, 52, 0.6)',
     borderRadius: 30,
-    top: 350    
+    top: 420,
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 15
   }
 });
 
