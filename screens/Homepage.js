@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ImageBackground, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput } from 'react-native'
 import React from 'react'
 
 const Homepage = () => {
@@ -7,10 +7,27 @@ const Homepage = () => {
   source={require('../assets/Backgrounds/Homepage.png')}
   style={styles.backgroundImage}>
     <SafeAreaView>
-      <View>
-        <Text>Homepage</Text>
-      </View>
-      </SafeAreaView>
+    <View
+      style={styles.forms}
+      >
+    <View style={styles.header}>
+      <Image
+      source={require('../assets/Backgrounds/logo.png')}
+      style={styles.logoImage}/>
+    </View>
+    <TextInput
+        style={styles.input}
+        placeholder="Digite seu e-mail"
+        placeholderTextColor="white"
+      />
+    <TextInput
+        style={styles.input}
+        placeholder="Digite sua senha"
+        keyboardType="numeric"
+        placeholderTextColor="white"
+      />
+    </View>
+    </SafeAreaView>
   </ImageBackground>
   )
 }
@@ -27,6 +44,37 @@ const styles = StyleSheet.create({
       width: '100%', 
       height: '100%', 
       resizeMode: 'cover', 
+  },
+  logoImage: {
+    width: 300, 
+    height: 80, 
+    resizeMode: 'contain', 
+    marginBottom: 30
+  },
+  header: {
+    top: 18,
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex'
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    color: 'white',
+    borderColor: 'white',
+    borderRadius: 20,
+    fontSize: 16
+  },
+  forms: {
+    margin: 20,
+    borderRadius: 20,
+    padding: 10,
+    backgroundColor: 'rgba(52, 52, 52, 0.6)',
+    borderRadius: 30,
+    top: 350    
   }
 });
 
