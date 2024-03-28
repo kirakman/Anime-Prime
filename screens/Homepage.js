@@ -1,8 +1,12 @@
-import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput } from 'react-native'
+import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity } from 'react-native'
 import React from 'react'
 import LoginButton from '../components/LoginButton';
+import { useNavigation } from '@react-navigation/native';
 
 const Homepage = () => {
+
+  const navigation = useNavigation();
+
   return (
   <ImageBackground
   source={require('../assets/Backgrounds/Homepage.png')}
@@ -30,6 +34,14 @@ const Homepage = () => {
     <View style={styles.button}>
     <LoginButton/>
     </View>
+    <View style={styles.textContainer}>
+            <Text style={styles.buttonText}>Ainda não possui uma conta?</Text>
+            <TouchableOpacity
+                 onPress={()=>navigation.navigate("Register")}
+            >
+              <Text style={styles.titleText}>Registrar</Text>
+            </TouchableOpacity>
+        </View> 
     </View>
     </SafeAreaView>
   </ImageBackground>
@@ -83,7 +95,23 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     marginTop: 15
-  }
-});
+  },
+  textContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    paddingBottom: 25
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+  },
+  titleText: {
+    fontSize: 18,
+    color: '#F89810',
+    fontWeight: 'bold', 
+    marginLeft: 5,
+  },
+})
 
 export default Homepage;

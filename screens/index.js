@@ -1,7 +1,6 @@
 import Homepage from "./Homepage";
-import Login from "./Homepage";
-import Register from "./Homepage";
-
+import Login from "./Login"; 
+import Register from "./Register";
 
 export {
     Homepage,
