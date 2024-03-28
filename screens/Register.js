@@ -49,6 +49,7 @@ const Register = () => {
         style={styles.input}
         placeholder="Confirme sua senha"
         placeholderTextColor="white"
+        secureTextEntry={isPasswordShown}
       />
     <View style={styles.button}>
     <RegisterButton/>
