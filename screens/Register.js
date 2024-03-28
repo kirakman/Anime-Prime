@@ -1,12 +1,14 @@
 import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity } from 'react-native'
-import React from 'react'
-import LoginButton from '../components/LoginButton';
+import React,{ useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import RegisterButton from '../components/RegisterButton';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const Register = () => {
 
   const navigation = useNavigation();
+  const [isPasswordShown, setIsPasswordShown] = useState(true);
 
   return (
   <ImageBackground
@@ -29,13 +31,23 @@ const Register = () => {
     <TextInput
         style={styles.input}
         placeholder="Digite sua senha"
-        keyboardType="numeric"
         placeholderTextColor="white"
+        secureTextEntry={isPasswordShown}
       />
+          <TouchableOpacity style={styles.icons}
+          onPress={() => setIsPasswordShown (!isPasswordShown)}
+          >
+          {
+          isPasswordShown == true ? (
+          <Ionicons name='eye-off' size={20} color={'#F89810'}/>
+          ) : (
+          <Ionicons name='eye' size={20} color={'#F89810'}/>
+          )
+          }                     
+        </TouchableOpacity>
     <TextInput
         style={styles.input}
         placeholder="Confirme sua senha"
-        keyboardType="numeric"
         placeholderTextColor="white"
       />
     <View style={styles.button}>
@@ -119,6 +131,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', 
     marginLeft: 5,
   },
+  icons: {
+    position: 'absolute',
+    right: 45,
+    top: 206
+  }
 })
 
 export default Register;

@@ -1,11 +1,13 @@
 import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import LoginButton from '../components/LoginButton';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 const Homepage = () => {
 
   const navigation = useNavigation();
+  const [isPasswordShown, setIsPasswordShown] = useState(true);
 
   return (
   <ImageBackground
@@ -28,9 +30,20 @@ const Homepage = () => {
     <TextInput
         style={styles.input}
         placeholder="Digite sua senha"
-        keyboardType="numeric"
         placeholderTextColor="white"
+        secureTextEntry={isPasswordShown}
       />
+              <TouchableOpacity style={styles.icons}
+          onPress={() => setIsPasswordShown (!isPasswordShown)}
+          >
+          {
+          isPasswordShown == true ? (
+          <Ionicons name='eye-off' size={20} color={'#F89810'}/>
+          ) : (
+          <Ionicons name='eye' size={20} color={'#F89810'}/>
+          )
+          }                
+        </TouchableOpacity>
     <View style={styles.button}>
     <LoginButton/>
     </View>
@@ -112,6 +125,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', 
     marginLeft: 5,
   },
+  icons: {
+    position: 'absolute',
+    right: 45,
+    top: 206
+  }
 })
 
 export default Homepage;
