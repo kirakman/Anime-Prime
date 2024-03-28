@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'rgba(52, 52, 52, 0.6)',
     borderRadius: 30,
-    top: 420,
+    top: 250,
   },
   button: {
     alignItems: 'center',
