@@ -1,20 +1,57 @@
-import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import React,{ useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import RegisterButton from '../components/RegisterButton';
 import { Ionicons } from '@expo/vector-icons';
-
+import { FIREBASE_AUTH } from '../FirebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Register = () => {
 
   const navigation = useNavigation();
   const [isPasswordShown, setIsPasswordShown] = useState(true);
 
+  // Firebase Auth
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
+
+  // Login
+
+  const signIn = async () => {
+    setLoading(true);
+    try {
+      const response = await auth.signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      alert('Sign in failed: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const signUp = async () => {
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(response);
+      alert('Registrado com sucesso! Por favor, cheque o seu e-mail.')
+    } catch (error) {
+      console.log(error);
+      alert('Sign in failed: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
   <ImageBackground
   source={require('../assets/Backgrounds/RegisterandLoginPage.png')}
   style={styles.backgroundImage}>
     <SafeAreaView>
+    <KeyboardAvoidingView behavior='padding'>
     <View
       style={styles.forms}
       >
@@ -27,12 +64,16 @@ const Register = () => {
         style={styles.input}
         placeholder="Digite seu e-mail"
         placeholderTextColor="white"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
       />
     <TextInput
         style={styles.input}
         placeholder="Digite sua senha"
         placeholderTextColor="white"
         secureTextEntry={isPasswordShown}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
       />
           <TouchableOpacity style={styles.icons}
           onPress={() => setIsPasswordShown (!isPasswordShown)}
@@ -50,12 +91,18 @@ const Register = () => {
         placeholder="Confirme sua senha"
         placeholderTextColor="white"
         secureTextEntry={isPasswordShown}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
       />
-    <View style={styles.button}>
-    <RegisterButton/>
+    <View style={styles.buttonContainer}>
+    <TouchableOpacity style={styles.button}
+    onPress={signUp}
+    >
+      <Text style={styles.buttonText}>Registrar</Text>
+    </TouchableOpacity>
     </View>
     <View style={styles.textContainer}>
-            <Text style={styles.buttonText}>Já possui possui uma conta?</Text>
+            <Text style={styles.secondbuttonText}>Já possui possui uma conta?</Text>
             <TouchableOpacity
                  onPress={()=>navigation.navigate("Homepage")}
             >
@@ -63,6 +110,7 @@ const Register = () => {
             </TouchableOpacity>
         </View> 
     </View>
+    </KeyboardAvoidingView>
     </SafeAreaView>
   </ImageBackground>
   )
@@ -122,7 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 25
   },
-  buttonText: {
+  secondbuttonText: {
     fontSize: 18,
     color: 'white',
   },
@@ -136,6 +184,24 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 45,
     top: 206
+  },
+  button: {
+    backgroundColor: '#E8E7E8',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    width: 150,
+    borderRadius: 55,
+    marginBottom: 20,
+    marginTop: 20
+  },
+  buttonText: {
+    color: '#F89810',
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  buttonContainer: {
+    alignItems: 'center'
   }
 })
 
