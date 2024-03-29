@@ -86,14 +86,6 @@ const Register = () => {
           )
           }                     
         </TouchableOpacity>
-    <TextInput
-        style={styles.input}
-        placeholder="Confirme sua senha"
-        placeholderTextColor="white"
-        secureTextEntry={isPasswordShown}
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-      />
     <View style={styles.buttonContainer}>
     <TouchableOpacity style={styles.button}
     onPress={signUp}
