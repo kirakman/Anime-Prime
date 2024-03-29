@@ -38,6 +38,8 @@ const Register = () => {
       const response = await createUserWithEmailAndPassword(auth, email, password);
       console.log(response);
       alert('Registrado com sucesso! Por favor, cheque o seu e-mail.')
+      setEmail('');
+      setPassword('');
     } catch (error) {
       console.log(error);
       alert('Sign in failed: ' + error.message);
