@@ -17,32 +17,16 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
 
-  // Login
-
-  const signIn = async () => {
-    setLoading(true);
-    try {
-      const response = await auth.signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      alert('Sign in failed: ' + error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   const signUp = async () => {
     setLoading(true);
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(response);
       alert('Registrado com sucesso! Por favor, cheque o seu e-mail.')
       setEmail('');
       setPassword('');
+      navigation.navigate('Homepage');
     } catch (error) {
-      console.log(error);
-      alert('Sign in failed: ' + error.message);
+      alert('O cadastro falhou: ' + error.message);
     } finally {
       setLoading(false);
     }

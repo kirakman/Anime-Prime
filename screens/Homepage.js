@@ -1,9 +1,10 @@
 import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+
 
 const Homepage = () => {
 
@@ -16,21 +17,18 @@ const Homepage = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const auth = FIREBASE_AUTH;
-  
-    // Login
-  
+
+    // Logar
+
     const signIn = async () => {
-      setLoading(true);
       try {
-        const response = await signInWithEmailAndPassword(auth, email, password);
-        alert('Login realizado com sucesso!');
+        await signInWithEmailAndPassword(auth, email, password);
+        alert('Usuario logado com sucesso!');
         setEmail('');
         setPassword('');
+        navigation.navigate('Dashboard');
       } catch (error) {
-        console.log(error);
-        alert('Erro no login, por favor, tente novamete: ' + error.message);
-      } finally {
-        setLoading(false);
+        alert('Erro na autenticação, por favor, tente novamente:', error.message);
       }
     }
 
