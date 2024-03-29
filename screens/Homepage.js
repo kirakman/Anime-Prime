@@ -1,6 +1,5 @@
 import { View, Text, SafeAreaView, ImageBackground, StyleSheet, Image,TextInput,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import LoginButton from '../components/LoginButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
