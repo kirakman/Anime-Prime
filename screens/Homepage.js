@@ -24,7 +24,7 @@ const Homepage = () => {
       setLoading(true);
       try {
         const response = await signInWithEmailAndPassword(auth, email, password);
-        console.log(response);
+        alert('Login realizado com sucesso!');
       } catch (error) {
         console.log(error);
         alert('Erro no login, por favor, tente novamete: ' + error.message);
