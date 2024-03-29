@@ -3,11 +3,35 @@ import React, { useState } from 'react'
 import LoginButton from '../components/LoginButton';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { FIREBASE_AUTH } from '../FirebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Homepage = () => {
 
   const navigation = useNavigation();
   const [isPasswordShown, setIsPasswordShown] = useState(true);
+
+    // Firebase Auth
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const auth = FIREBASE_AUTH;
+  
+    // Login
+  
+    const signIn = async () => {
+      setLoading(true);
+      try {
+        const response = await signInWithEmailAndPassword(auth, email, password);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+        alert('Erro no login, por favor, tente novamete: ' + error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
 
   return (
   <ImageBackground
@@ -26,12 +50,16 @@ const Homepage = () => {
         style={styles.input}
         placeholder="Digite seu e-mail"
         placeholderTextColor="white"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
       />
     <TextInput
         style={styles.input}
         placeholder="Digite sua senha"
         placeholderTextColor="white"
         secureTextEntry={isPasswordShown}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
       />
               <TouchableOpacity style={styles.icons}
           onPress={() => setIsPasswordShown (!isPasswordShown)}
@@ -44,8 +72,10 @@ const Homepage = () => {
           )
           }                
         </TouchableOpacity>
-    <View style={styles.button}>
-    <LoginButton/>
+    <View style={styles.buttonFlex}>
+    <TouchableOpacity style={styles.button} onPress={signIn}>
+      <Text style={styles.buttonText}>Entrar</Text>
+    </TouchableOpacity>    
     </View>
     <View style={styles.textContainer}>
             <Text style={styles.buttonText}>Ainda não possui uma conta?</Text>
@@ -105,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     top: 250,
   },
-  button: {
+  buttonFlex: {
     alignItems: 'center',
     marginTop: 15
   },
@@ -129,7 +159,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 45,
     top: 206
-  }
+  },
+  button: {
+    backgroundColor: '#CA7745',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    width: 150,
+    borderRadius: 55,
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
+}
 })
 
 export default Homepage;
