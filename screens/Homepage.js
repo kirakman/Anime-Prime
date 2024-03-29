@@ -22,15 +22,20 @@ const Homepage = () => {
 
     const signIn = async () => {
       try {
+        if (!email || !password) {
+          alert('Insira suas credenciais para fazer login!');
+          return;
+        }
         await signInWithEmailAndPassword(auth, email, password);
-        alert('Usuario logado com sucesso!');
+        alert('Usuário logado com sucesso!');
         setEmail('');
         setPassword('');
         navigation.navigate('Dashboard');
       } catch (error) {
-        alert('Erro na autenticação, por favor, tente novamente:', error.message);
+        alert('Erro na autenticação, por favor, tente novamente =>' + error.message);
       }
     }
+    
 
   return (
   <ImageBackground
