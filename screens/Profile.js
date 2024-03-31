@@ -48,7 +48,7 @@ const Profile = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#2121' }}>
+    <View style={{ flex: 1, backgroundColor: '#212121' }}>
       <SafeAreaView>
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={handleNavigateToHomepage}>
