@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Homepage = () => {
@@ -20,6 +21,24 @@ const Homepage = () => {
 
     // Logar
 
+    // const signIn = async () => {
+    //   try {
+    //     if (!email || !password) {
+    //       alert('Insira suas credenciais para fazer login!');
+    //       return;
+    //     }
+    //     await signInWithEmailAndPassword(auth, email, password);
+    //     alert('Usuário logado com sucesso!');
+    //     setEmail('');
+    //     setPassword('');
+    //     navigation.navigate('Dashboard');
+    //   } catch (error) {
+    //     alert('Erro na autenticação, por favor, tente novamente =>' + error.message);
+    //   }
+    // }
+
+    // Estar LOgado
+
     const signIn = async () => {
       try {
         if (!email || !password) {
@@ -28,6 +47,8 @@ const Homepage = () => {
         }
         await signInWithEmailAndPassword(auth, email, password);
         alert('Usuário logado com sucesso!');
+        // Armazena o estado de login do usuário
+        await AsyncStorage.setItem('isLoggedIn', 'true');
         setEmail('');
         setPassword('');
         navigation.navigate('Dashboard');
