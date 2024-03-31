@@ -5,23 +5,23 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 
-const Dashboard = () => {
+const Search = () => {
   const navigation = useNavigation();
 
   const handleNavigateToHomepage = () => {
     navigation.navigate('Dashboard');
   };
 
-  const handleNavigateToProfile = () => {
-    navigation.navigate('Profile');
-  };
-
   const handleNavigateToSearch = () => {
     navigation.navigate('Search');
   };
 
+  const handleNavigateToProfile = () => {
+    navigation.navigate('Profile');
+  };
+
   return (
-    <View style={{flex: 1, backgroundColor: '#212121'}}>
+    <View style={{flex: 1, backgroundColor: 'blue'}}>
       <SafeAreaView>
       <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handleNavigateToHomepage}>
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default Search;

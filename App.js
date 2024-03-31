@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Homepage, Login, Register, Dashboard } from './screens/index';
+import { Homepage, Login, Register, Dashboard,Profile, Search } from './screens/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -39,6 +39,22 @@ export default function App() {
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
+        options={{
+          headerShown:false
+        }}
+        
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown:false
+        }}
+
+      />
+      <Stack.Screen
+        name="Search"
+        component={Search}
         options={{
           headerShown:false
         }}
